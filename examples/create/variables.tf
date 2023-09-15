@@ -1,11 +1,24 @@
-variable "vpc_id" {
-  description = "Existing VPC to use (specify this, if you don't want to create new VPC)"
+variable "fusionauth_api_key" {
+  description = "The API Key for the FusionAuth instance"
+  type        = string
+  default     = ""
+  sensitive   = true
+}
+
+variable "fusionauth_host" {
+  description = "Host for FusionAuth instance"
   type        = string
   default     = ""
 }
 
-variable "cidr" {
-  description = "The CIDR block for the VPC. Default value is a valid CIDR, but not acceptable by AWS and should be overriden"
+variable "fusionauth_default_tenant_id" {
+  description = "The Tenant Id of the Default FusionAuth Tenant"
   type        = string
-  default     = "0.0.0.0/0"
+  default     = ""
+}
+
+variable "fusionauth_default_application_id" {
+  description = "The Application Id of the Default FusionAuth Application"
+  type        = string
+  default     = "3c219e58-ed0e-4b18-ad48-f4f92793ae32"
 }

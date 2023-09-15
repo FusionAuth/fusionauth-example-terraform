@@ -1,19 +1,72 @@
-locals {
-  create_vpc = var.vpc_id == ""
+terraform {
+  required_providers {
+    fusionauth = {
+      source = "gpsinsight/fusionauth"
+      version = "0.1.96"
+    }
+  }
 }
 
-data "aws_vpc" "selected" {
-  count = local.create_vpc ? 0 : 1
-
-  id = var.vpc_id
+provider "fusionauth" {
+  api_key = var.fusionauth_api_key
+  host = "https://auth.example.com"
 }
 
-resource "aws_vpc" "this" {
-  count = local.create_vpc ? 1 : 0
-
-  cidr_block = var.cidr
+data "fusionauth_tenant" "Default" {
+  name = "Default"
 }
 
-resource "aws_internet_gateway" "this" {
-  vpc_id = try(data.aws_vpc.selected[0].id, aws_vpc.this[0].id)
+data "fusionauth_application" "FusionAuth" {
+  name = "FusionAuth"
+}
+
+resource "fusionauth_application" "forum" {
+  tenant_id = data.fusionauth_tenant.Default.id
+  name = "forum"
+}
+
+resource "fusionauth_application_role" "forum_admin_role" {
+  application_id = fusionauth_application.forum.id
+  is_default     = false
+  is_super_role  = true
+  name           = "admin"
+}
+
+resource "fusionauth_application_role" "forum_user_role" {
+  application_id = fusionauth_application.forum.id
+  is_default     = true
+  is_super_role  = false
+  name           = "user"
+}
+
+resource "fusionauth_user" "forum-user1" {
+  email                    = "forum-user1@email.internal"
+  first_name               = "John"
+  last_name                = "Doe"
+  middle_name              = "William"
+  password_change_required = true
+  password                 = "%WLTvrsYELsyPqC^R7FMUNxt##VyDf6XaWk2R7!gS$oL76Ww"
+  username_status          = "ACTIVE"
+}
+
+resource "fusionauth_user" "forum-admin1" {
+  email                    = "forum-admin1@email.internal"
+  first_name               = "John"
+  last_name                = "Doe"
+  middle_name              = "William"
+  password_change_required = true
+  password                 = "@CfosPAVT3&hCzz5c^&#2F5BxNUY$X!@s!7Wx9bd6Yon54e3"
+  username_status          = "ACTIVE"
+}
+
+resource "fusionauth_registration" "forum-admin1-admin-role" {
+  user_id        = fusionauth_user.forum-admin1.id
+  application_id = fusionauth_application.forum.id
+  roles          = ["admin"]
+}
+
+resource "fusionauth_registration" "forum-user1-user-role" {
+  user_id        = fusionauth_user.forum-user1.id
+  application_id = fusionauth_application.forum.id
+  roles          = ["user"]
 }

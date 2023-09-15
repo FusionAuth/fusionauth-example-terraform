@@ -1,29 +1,24 @@
-variable "allowed_account_ids" {
-  description = "List of allowed AWS account ids where resources can be created"
-  type        = list(string)
-  default     = []
+variable "fusionauth_api_key" {
+  description = "The API Key for the FusionAuth instance"
+  type        = string
+  default     = ""
+  sensitive   = true
 }
 
-variable "name" {
-  description = "Name to be used on all the resources as identifier"
+variable "fusionauth_host" {
+  description = "Host for FusionAuth instance"
   type        = string
   default     = ""
 }
 
-variable "cidr" {
-  description = "The CIDR block for the VPC. Default value is a valid CIDR, but not acceptable by AWS and should be overriden"
+variable "fusionauth_default_tenant_id" {
+  description = "The Tenant Id of the Default FusionAuth Tenant"
   type        = string
-  default     = "0.0.0.0/0"
+  default     = ""
 }
 
-variable "azs" {
-  description = "A list of availability zones in the region"
-  type        = list(string)
-  default     = []
-}
-
-variable "public_subnets" {
-  description = "A list of public subnets inside the VPC"
-  type        = list(string)
-  default     = []
+variable "fusionauth_default_application_id" {
+  description = "The Application Id of the Default FusionAuth Application"
+  type        = string
+  default     = "3c219e58-ed0e-4b18-ad48-f4f92793ae32"
 }

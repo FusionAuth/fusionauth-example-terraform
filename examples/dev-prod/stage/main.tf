@@ -1,30 +1,13 @@
-provider "aws" {
-  region = "eu-west-1"
-
-  allowed_account_ids = var.allowed_account_ids
-}
-
 terraform {
-  backend "s3" {
-    key = "medium-terraform/stage/terraform.tfstate"
-    # ...
+  required_providers {
+    fusionauth = {
+      source = "gpsinsight/fusionauth"
+      version = "0.1.96"
+    }
   }
 }
 
-module "network" {
-  source = "../modules/network"
-
-  name = var.name
-
-  cidr = var.cidr
-  azs  = var.azs
-
-  public_subnets = var.public_subnets
-}
-
-module "alb" {
-  source = "terraform-aws-modules/alb/aws"
-  version = "~> 6.0"
-
-  #...
+provider "fusionauth" {
+  api_key = var.fusionauth_api_key
+  host = "https://auth.example.com"
 }
