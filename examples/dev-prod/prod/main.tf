@@ -9,5 +9,5 @@ terraform {
 
 provider "fusionauth" {
   api_key = var.fusionauth_api_key
-  host = "https://auth.example.com"
+  host = var.fusionauth_host
 }

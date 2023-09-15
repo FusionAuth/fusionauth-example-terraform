@@ -1,9 +1,5 @@
-allowed_account_ids = ["222222222222"]
+fusionauth_api_key = "gHPdrfQa4A36JVoFfVDAY4jG4g8FGTpCd98_zZHTfW1KM2BI7an2gUhB"
 
-name = "my-stage-vpc"
+fusionauth_host = "http://localhost:9011"
 
-cidr = "10.20.0.0/16"
-
-azs = ["eu-west-1a", "eu-west-1b", "eu-west-1c"]
-
-public_subnets = ["10.20.101.0/24", "10.20.102.0/24", "10.20.103.0/24"]
+fusionauth_default_tenant_id = ""
