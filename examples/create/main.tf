@@ -11,7 +11,7 @@ provider "fusionauth" {
   api_key = var.fusionauth_api_key
   host    = var.fusionauth_host
 }
-
+#tag::defaultDataSource[]
 data "fusionauth_tenant" "Default" {
   name = "Default"
 }
@@ -19,7 +19,8 @@ data "fusionauth_tenant" "Default" {
 data "fusionauth_application" "FusionAuth" {
   name = "FusionAuth"
 }
-
+#end::defaultDataSource[]
+#tag::createForumTenant[]
 resource "fusionauth_tenant" "forum" {
   lifecycle {
     prevent_destroy = true
@@ -94,12 +95,14 @@ resource "fusionauth_tenant" "forum" {
     set_password_email_template_id = fusionauth_email.setup-password.id
   }
 }
-
+#end::createForumTenant[]
+#tag::createForumApplication[]
 resource "fusionauth_application" "forum" {
   tenant_id = fusionauth_tenant.forum.id
   name      = "forum"
 }
-
+#end::createForumApplication[]
+#tag::createForumApplicationRoles[]
 resource "fusionauth_application_role" "forum_admin_role" {
   application_id = fusionauth_application.forum.id
   is_default     = false
@@ -113,40 +116,7 @@ resource "fusionauth_application_role" "forum_user_role" {
   is_super_role  = false
   name           = "user"
 }
-
-resource "fusionauth_user" "forum-user1" {
-  tenant_id                = fusionauth_tenant.forum.id
-  email                    = "forum-user1@email.internal"
-  first_name               = "John"
-  last_name                = "Doe"
-  middle_name              = "William"
-  password_change_required = true
-  password                 = "%WLTvrsYELsyPqC^R7FMUNxt##VyDf6XaWk2R7!gS$oL76Ww"
-  username_status          = "ACTIVE"
-}
-
-resource "fusionauth_user" "forum-admin1" {
-  tenant_id                = fusionauth_tenant.forum.id
-  email                    = "forum-admin1@email.internal"
-  first_name               = "John"
-  last_name                = "Doe"
-  middle_name              = "William"
-  password_change_required = true
-  password                 = "@CfosPAVT3&hCzz5c^&#2F5BxNUY$X!@s!7Wx9bd6Yon54e3"
-  username_status          = "ACTIVE"
-}
-
-resource "fusionauth_registration" "forum-admin1-admin-role" {
-  user_id        = fusionauth_user.forum-admin1.id
-  application_id = fusionauth_application.forum.id
-  roles          = ["admin"]
-}
-
-resource "fusionauth_registration" "forum-user1-user-role" {
-  user_id        = fusionauth_user.forum-user1.id
-  application_id = fusionauth_application.forum.id
-  roles          = ["user"]
-}
+#end::createForumApplicationRoles[]
 
 resource "fusionauth_email" "breached-password" {
   name                  = "Breached Password"
