@@ -16,7 +16,7 @@ provider "fusionauth" {
 
 import {
   to = fusionauth_tenant.Default
-  id = var.fusionauth_default_tenant_id
+  id = "d7d09513-a3f5-401c-9685-34ab6c552453"
 }
 
 resource "fusionauth_tenant" "Default" {
@@ -94,15 +94,12 @@ resource "fusionauth_tenant" "Default" {
     verification_strategy               = "ClickableLink"
     verify_email                        = false
     verify_email_when_changed           = false
-    forgot_password_email_template_id   = "00000000-0000-0000-0000-000000000000"
-    passwordless_email_template_id      = "00000000-0000-0000-0000-000000000000"
-    set_password_email_template_id      = "00000000-0000-0000-0000-000000000000"
   }
 }
 
 import {
   to = fusionauth_application.FusionAuth
-  id = var.fusionauth_default_application_id
+  id = "3c219e58-ed0e-4b18-ad48-f4f92793ae32"
 }
 
 resource "fusionauth_application" "FusionAuth" {
@@ -110,3 +107,21 @@ resource "fusionauth_application" "FusionAuth" {
   name = "FusionAuth"
 }
 
+resource "fusionauth_application" "forum" {
+  tenant_id = fusionauth_tenant.Default.id
+  name      = "forum"
+}
+
+resource "fusionauth_application_role" "forum_admin_role" {
+  application_id = fusionauth_application.forum.id
+  is_default     = false
+  is_super_role  = true
+  name           = "admin"
+}
+
+resource "fusionauth_application_role" "forum_user_role" {
+  application_id = fusionauth_application.forum.id
+  is_default     = true
+  is_super_role  = false
+  name           = "user"
+}
