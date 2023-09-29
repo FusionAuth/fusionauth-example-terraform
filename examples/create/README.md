@@ -1,16 +1,18 @@
 # Single FusionAuth instance configuration using Terraform
 
-This directory contains code as an example of structuring Terraform configurations for a  single FusionAuth instance configuration, where no external dependencies were used.
+This directory contains code as an example of structuring Terraform configurations for a single FusionAuth instance configuration, where no external dependencies were used.
 
 ## Features
 
 This code illustrates how to:
 
 1. Use the FusionAuth Terraform Provider
-2. Specify and use of variables of the existing FusionAuth instance
+2. Specify and use of variables from the existing FusionAuth instance
 3. Use Data Source definitions for existing Resources
 4. Create a Tenant and Application with a few example configurations
 5. The use of prevent_destroy and ignore_changes
+
+The initial configuration is based on the kickstart.json in this repository.
 
 ## See also
 

@@ -1,0 +1,37 @@
+{
+  "variables": {
+    "defaultTenantId": "d7d09513-a3f5-401c-9685-34ab6c552453",
+    "adminEmail": "admin@fusionauth.io",
+    "adminPassword": "password",
+    "user.name": "admin",
+    "anotherId": "#{UUID()}"
+  },
+  "apiKeys": [
+    {
+      "key": "bf69486b-4733-4470-a592-f1bfce7af580",
+      "description": "Standard development API key"
+    },
+    {
+      "key": "gHPdrfQa4A36JVoFfVDAY4jG4g8FGTpCd98_zZHTfW1KM2BI7an2gUhB",
+      "description": "Production API key"
+    }
+  ],
+  "requests": [
+    {
+      "method": "POST",
+      "url": "/api/user/registration",
+      "body": {
+        "user": {
+          "email": "#{adminEmail}",
+          "password": "#{adminPassword}"
+        },
+        "registration": {
+          "applicationId": "#{FUSIONAUTH_APPLICATION_ID}",
+          "roles": [
+            "admin"
+          ]
+        }
+      }
+    }
+  ]
+}
