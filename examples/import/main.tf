@@ -20,6 +20,9 @@ import {
 }
 
 resource "fusionauth_tenant" "Default" {
+  lifecycle {
+    prevent_destroy = true
+  }
   name = "Default"
   issuer = "acme.com"
   theme_id = "00000000-0000-0000-0000-000000000000"
@@ -104,10 +107,13 @@ import {
 }
 
 resource "fusionauth_application" "FusionAuth" {
+  lifecycle {
+    prevent_destroy = true
+  }
   tenant_id = fusionauth_tenant.Default.id
   name = "FusionAuth"
 }
-#tag::defaultApplicationImport[]
+#end::defaultApplicationImport[]
 resource "fusionauth_application" "forum" {
   tenant_id = fusionauth_tenant.Default.id
   name      = "forum"
