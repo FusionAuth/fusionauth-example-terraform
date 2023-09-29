@@ -22,3 +22,21 @@ variable "fusionauth_default_application_id" {
   type        = string
   default     = "3c219e58-ed0e-4b18-ad48-f4f92793ae32"
 }
+
+variable "fusionauth_default_theme_id" {
+  description = "The Default Theme Id of the FusionAuth Instance"
+  type        = string
+  default     = ""
+}
+
+variable "fusionauth_email_configuration_host" {
+  description = "The Email Server Host used to send emails from FusionAuth"
+  type = string
+  default = "localhost"
+}
+
+variable "fusionauth_email_configuration_port" {
+  description = "The Email Server Port used to send emails from FusionAuth"
+  type = string
+  default = "25"
+}
