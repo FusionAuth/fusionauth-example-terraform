@@ -16,7 +16,7 @@ provider "fusionauth" {
 #tag::defaultTenantImport[]
 import {
   to = fusionauth_tenant.Default
-  id = "d7d09513-a3f5-401c-9685-34ab6c552453"
+  id = "Replace-This-With-The-Existing-Default-Tenant-Id"
 }
 
 resource "fusionauth_tenant" "Default" {
