@@ -86,7 +86,7 @@ resource "fusionauth_tenant" "forum" {
   }
   jwt_configuration {
     refresh_token_time_to_live_in_minutes = 43200
-    time_to_live_in_seconds               = 1800
+    time_to_live_in_seconds               = 3600
   }
   email_configuration {
     host = var.fusionauth_email_configuration_host
