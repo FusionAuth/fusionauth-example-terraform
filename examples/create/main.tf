@@ -144,6 +144,15 @@ resource "fusionauth_email" "change-password" {
   default_text_template = file("${path.module}/email_templates/change-password.txt.ftl")
   from_email            = "example@local.fusionauth.io"
 }
+
+resource "fusionauth_email" "setup-password" {
+  name                  = "Setup Password"
+  default_from_name     = "Setup Password"
+  default_html_template = file("${path.module}/email_templates/setup-password.html.ftl")
+  default_subject       = "Setup Password"
+  default_text_template = file("${path.module}/email_templates/setup-password.txt.ftl")
+  from_email            = "example@local.fusionauth.io"
+}
 #end::createEmailTemplate[]
 resource "fusionauth_email" "confirm-child" {
   name                  = "Confirm Child"
@@ -205,15 +214,6 @@ resource "fusionauth_email" "registration-verification" {
   default_html_template = file("${path.module}/email_templates/registration-verification.html.ftl")
   default_subject       = "Registration Verification"
   default_text_template = file("${path.module}/email_templates/registration-verification.txt.ftl")
-  from_email            = "example@local.fusionauth.io"
-}
-
-resource "fusionauth_email" "setup-password" {
-  name                  = "Setup Password"
-  default_from_name     = "Setup Password"
-  default_html_template = file("${path.module}/email_templates/setup-password.html.ftl")
-  default_subject       = "Setup Password"
-  default_text_template = file("${path.module}/email_templates/setup-password.txt.ftl")
   from_email            = "example@local.fusionauth.io"
 }
 
