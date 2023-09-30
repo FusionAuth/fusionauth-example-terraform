@@ -135,7 +135,7 @@ resource "fusionauth_email" "breached-password" {
   default_text_template = file("${path.module}/email_templates/breached-password.txt.ftl")
   from_email            = "example@local.fusionauth.io"
 }
-
+#tag::createEmailTemplate[]
 resource "fusionauth_email" "change-password" {
   name                  = "Change Password"
   default_from_name     = "Change Password"
@@ -144,7 +144,7 @@ resource "fusionauth_email" "change-password" {
   default_text_template = file("${path.module}/email_templates/change-password.txt.ftl")
   from_email            = "example@local.fusionauth.io"
 }
-
+#end::createEmailTemplate[]
 resource "fusionauth_email" "confirm-child" {
   name                  = "Confirm Child"
   default_from_name     = "Confirm Child"
