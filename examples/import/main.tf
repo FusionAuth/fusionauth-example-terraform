@@ -1,3 +1,4 @@
+#tag::terraformProvider[]
 terraform {
   required_providers {
     fusionauth = {
@@ -9,15 +10,19 @@ terraform {
 
 provider "fusionauth" {
   api_key = var.fusionauth_api_key
-  host = "https://auth.example.com"
+  host = var.fusionauth_host
 }
-
+#end::terraformProvider[]
+#tag::defaultTenantImport[]
 import {
   to = fusionauth_tenant.Default
-  id = var.fusionauth_default_tenant_id
+  id = "Replace-This-With-The-Existing-Default-Tenant-Id"
 }
 
 resource "fusionauth_tenant" "Default" {
+  lifecycle {
+    prevent_destroy = true
+  }
   name = "Default"
   issuer = "acme.com"
   theme_id = "00000000-0000-0000-0000-000000000000"
@@ -92,19 +97,46 @@ resource "fusionauth_tenant" "Default" {
     verification_strategy               = "ClickableLink"
     verify_email                        = false
     verify_email_when_changed           = false
-    forgot_password_email_template_id   = "00000000-0000-0000-0000-000000000000"
-    passwordless_email_template_id      = "00000000-0000-0000-0000-000000000000"
-    set_password_email_template_id      = "00000000-0000-0000-0000-000000000000"
   }
 }
-
+#end::defaultTenantImport[]
+#tag::defaultApplicationImport[]
 import {
   to = fusionauth_application.FusionAuth
-  id = var.fusionauth_default_application_id
+  id = "3c219e58-ed0e-4b18-ad48-f4f92793ae32"
 }
 
 resource "fusionauth_application" "FusionAuth" {
+  lifecycle {
+    prevent_destroy = true
+  }
   tenant_id = fusionauth_tenant.Default.id
   name = "FusionAuth"
 }
+#end::defaultApplicationImport[]
+resource "fusionauth_application" "forum" {
+  tenant_id = fusionauth_tenant.Default.id
+  name      = "forum"
+  jwt_configuration {
+    access_token_id = fusionauth_key.forum-access-token.id
+  }
+}
 
+resource "fusionauth_application_role" "forum_admin_role" {
+  application_id = fusionauth_application.forum.id
+  is_default     = false
+  is_super_role  = true
+  name           = "admin"
+}
+
+resource "fusionauth_application_role" "forum_user_role" {
+  application_id = fusionauth_application.forum.id
+  is_default     = true
+  is_super_role  = false
+  name           = "user"
+}
+
+resource "fusionauth_key" "forum-access-token" {
+  algorithm = "HS512"
+  name      = "Forum Application Access Token Key"
+}

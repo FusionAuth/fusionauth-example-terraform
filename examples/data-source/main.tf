@@ -9,20 +9,25 @@ terraform {
 
 provider "fusionauth" {
   api_key = var.fusionauth_api_key
-  host = "https://auth.example.com"
+  host = var.fusionauth_host
 }
-
+#tag::defaultTenantDataSource[]
 data "fusionauth_tenant" "Default" {
   name = "Default"
 }
-
+#end::defaultTenantDataSource[]
+#tag::defaultApplicationDataSource[]
 data "fusionauth_application" "FusionAuth" {
   name = "FusionAuth"
 }
+#end::defaultApplicationDataSource[]
 
 resource "fusionauth_application" "forum" {
   tenant_id = data.fusionauth_tenant.Default.id
   name = "forum"
+  jwt_configuration {
+    access_token_id = fusionauth_key.forum-access-token.id
+  }
 }
 
 resource "fusionauth_application_role" "forum_admin_role" {
@@ -39,34 +44,7 @@ resource "fusionauth_application_role" "forum_user_role" {
   name           = "user"
 }
 
-resource "fusionauth_user" "forum-user1" {
-  email                    = "forum-user1@email.internal"
-  first_name               = "John"
-  last_name                = "Doe"
-  middle_name              = "William"
-  password_change_required = true
-  password                 = "%WLTvrsYELsyPqC^R7FMUNxt##VyDf6XaWk2R7!gS$oL76Ww"
-  username_status          = "ACTIVE"
-}
-
-resource "fusionauth_user" "forum-admin1" {
-  email                    = "forum-admin1@email.internal"
-  first_name               = "John"
-  last_name                = "Doe"
-  middle_name              = "William"
-  password_change_required = true
-  password                 = "@CfosPAVT3&hCzz5c^&#2F5BxNUY$X!@s!7Wx9bd6Yon54e3"
-  username_status          = "ACTIVE"
-}
-
-resource "fusionauth_registration" "forum-admin1-admin-role" {
-  user_id        = fusionauth_user.forum-admin1.id
-  application_id = fusionauth_application.forum.id
-  roles          = ["admin"]
-}
-
-resource "fusionauth_registration" "forum-user1-user-role" {
-  user_id        = fusionauth_user.forum-user1.id
-  application_id = fusionauth_application.forum.id
-  roles          = ["user"]
+resource "fusionauth_key" "forum-access-token" {
+  algorithm = "HS512"
+  name      = "Forum Application Access Token Key"
 }

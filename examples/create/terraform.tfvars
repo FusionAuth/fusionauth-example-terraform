@@ -1,11 +1,7 @@
-# Specify existing VPC ID to use it:
-# vpc_id = "vpc-9651acf1"
+fusionauth_api_key = "gHPdrfQa4A36JVoFfVDAY4jG4g8FGTpCd98_zZHTfW1KM2BI7an2gUhB"
 
-# Or, create a new VPC:
-name = "my-vpc"
+fusionauth_host = "http://localhost:9011"
 
-cidr = "10.10.0.0/16"
+fusionauth_default_tenant_id = ""
 
-azs = ["eu-west-1a", "eu-west-1b", "eu-west-1c"]
-
-public_subnets = ["10.10.101.0/24", "10.10.102.0/24", "10.10.103.0/24"]
+fusionauth_default_theme_id = "75a068fd-e94b-451a-9aeb-3ddb9a3b5987"
