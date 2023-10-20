@@ -91,7 +91,7 @@ resource "fusionauth_tenant" "forum" {
   email_configuration {
     host = var.fusionauth_email_configuration_host
     port = var.fusionauth_email_configuration_port
-    forgot_password_email_template_id = fusionauth_email.change-password.id
+    forgot_password_email_template_id = fusionauth_email.forgot-password.id
     set_password_email_template_id = fusionauth_email.setup-password.id
   }
 }
@@ -238,17 +238,17 @@ resource "fusionauth_email" "two-factor-authentication" {
 resource "fusionauth_email" "two-factor-authentication-method-added" {
   name                  = "Two Factor Authentication Method Added"
   default_from_name     = "Two Factor Authentication Method Added"
-  default_html_template = file("${path.module}/email_templates/Two_Factor_Authentication_Added.html.ftl")
+  default_html_template = file("${path.module}/email_templates/Two_Factor_Authentication_Method_Added.html.ftl")
   default_subject       = "Two Factor Authentication Method Added"
-  default_text_template = file("${path.module}/email_templates/Two_Factor_Authentication_Added.txt.ftl")
+  default_text_template = file("${path.module}/email_templates/Two_Factor_Authentication_Method_Added.txt.ftl")
   from_email            = "example@local.fusionauth.io"
 }
 
 resource "fusionauth_email" "two-factor-authentication-method-removed" {
   name                  = "Two Factor Authentication Method Removed"
   default_from_name     = "Two Factor Authentication Method Removed"
-  default_html_template = file("${path.module}/email_templates/Two_Factor_Authentication_Removed.html.ftl")
+  default_html_template = file("${path.module}/email_templates/Two_Factor_Authentication_Method_Removed.html.ftl")
   default_subject       = "Two Factor Authentication Method Removed"
-  default_text_template = file("${path.module}/email_templates/Two_Factor_Authentication_Removed.txt.ftl")
+  default_text_template = file("${path.module}/email_templates/Two_Factor_Authentication_Method_Removed.txt.ftl")
   from_email            = "example@local.fusionauth.io"
 }
