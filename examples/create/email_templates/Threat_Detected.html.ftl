@@ -1,3 +1,4 @@
+[#-- @ftlvariable name="event" type="io.fusionauth.domain.event.UserLoginSuspiciousEvent" --]
 [#setting url_escaping_charset="UTF-8"]
 [#if event.type == "UserLoginSuspicious"]
   <p>A suspicious login was made on your account. If this was you, you can safely ignore this email. If this wasn't you, we recommend that you change your password as soon as possible.</p>

@@ -58,7 +58,6 @@ services:
       FUSIONAUTH_APP_URL: http://fusionauth:9011
       SEARCH_SERVERS: http://search:9200
       SEARCH_TYPE: elasticsearch
-      FUSIONAUTH_APP_KICKSTART_FILE: ${FUSIONAUTH_APP_KICKSTART_FILE}
 
     networks:
       - db_net
@@ -68,8 +67,6 @@ services:
       - 9011:9011
     volumes:
       - fusionauth_config:/usr/local/fusionauth/config
-      - ./kickstart:/usr/local/fusionauth/kickstart
-
 
 networks:
   db_net:

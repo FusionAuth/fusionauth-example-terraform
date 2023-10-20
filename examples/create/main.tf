@@ -127,128 +127,128 @@ resource "fusionauth_key" "forum-access-token" {
 }
 #end::createKey[]
 
-resource "fusionauth_email" "breached-password" {
-  name                  = "Breached Password"
-  default_from_name     = "Breached Password"
-  default_html_template = file("${path.module}/email_templates/breached-password.html.ftl")
-  default_subject       = "Breached Password"
-  default_text_template = file("${path.module}/email_templates/breached-password.txt.ftl")
+resource "fusionauth_email" "breached-password-notification" {
+  name                  = "Breached Password Notification"
+  default_from_name     = "Breached Password Notification"
+  default_html_template = file("${path.module}/email_templates/Breached_Password_Notification.html.ftl")
+  default_subject       = "Breached Password Notification"
+  default_text_template = file("${path.module}/email_templates/Breached_Password_Notification.html.ftl")
   from_email            = "example@local.fusionauth.io"
 }
 #tag::createEmailTemplate[]
-resource "fusionauth_email" "change-password" {
-  name                  = "Change Password"
-  default_from_name     = "Change Password"
-  default_html_template = file("${path.module}/email_templates/change-password.html.ftl")
-  default_subject       = "Change Password"
-  default_text_template = file("${path.module}/email_templates/change-password.txt.ftl")
+resource "fusionauth_email" "forgot-password" {
+  name                  = "Forgot Password"
+  default_from_name     = "Forgot Password"
+  default_html_template = file("${path.module}/email_templates/Forgot_Password.html.ftl")
+  default_subject       = "Forgot Password"
+  default_text_template = file("${path.module}/email_templates/Forgot_Password.txt.ftl")
   from_email            = "example@local.fusionauth.io"
 }
 
 resource "fusionauth_email" "setup-password" {
   name                  = "Setup Password"
   default_from_name     = "Setup Password"
-  default_html_template = file("${path.module}/email_templates/setup-password.html.ftl")
+  default_html_template = file("${path.module}/email_templates/Setup_Password.html.ftl")
   default_subject       = "Setup Password"
-  default_text_template = file("${path.module}/email_templates/setup-password.txt.ftl")
+  default_text_template = file("${path.module}/email_templates/Setup_Password.txt.ftl")
   from_email            = "example@local.fusionauth.io"
 }
 #end::createEmailTemplate[]
-resource "fusionauth_email" "confirm-child" {
-  name                  = "Confirm Child"
-  default_from_name     = "Confirm Child"
-  default_html_template = file("${path.module}/email_templates/confirm-child.html.ftl")
-  default_subject       = "Confirm Child"
-  default_text_template = file("${path.module}/email_templates/confirm-child.txt.ftl")
+resource "fusionauth_email" "confirm-child-account" {
+  name                  = "Confirm Child Account"
+  default_from_name     = "Confirm Child Account"
+  default_html_template = file("${path.module}/email_templates/Confirm_Child_Account.html.ftl")
+  default_subject       = "Confirm Child Account"
+  default_text_template = file("${path.module}/email_templates/Confirm_Child_Account.txt.ftl")
   from_email            = "example@local.fusionauth.io"
 }
 
-resource "fusionauth_email" "coppa-email-plus-notice" {
-  name                  = "COPPA Email Plus Notice"
-  default_from_name     = "COPPA Email Plus Notice"
-  default_html_template = file("${path.module}/email_templates/coppa-email-plus-notice.html.ftl")
-  default_subject       = "COPPA Email Plus Notice"
-  default_text_template = file("${path.module}/email_templates/coppa-email-plus-notice.txt.ftl")
+resource "fusionauth_email" "coppa-notice-reminder" {
+  name                  = "COPPA Notice Reminder"
+  default_from_name     = "COPPA Notice Reminder"
+  default_html_template = file("${path.module}/email_templates/COPPA_Notice_Reminder.html.ftl")
+  default_subject       = "COPPA Notice Reminder"
+  default_text_template = file("${path.module}/email_templates/COPPA_Notice_Reminder.txt.ftl")
   from_email            = "example@local.fusionauth.io"
 }
 
 resource "fusionauth_email" "coppa-notice" {
   name                  = "COPPA Notice"
   default_from_name     = "COPPA Notice"
-  default_html_template = file("${path.module}/email_templates/coppa-notice.html.ftl")
+  default_html_template = file("${path.module}/email_templates/COPPA_Notice.html.ftl")
   default_subject       = "COPPA Notice"
-  default_text_template = file("${path.module}/email_templates/coppa-notice.txt.ftl")
+  default_text_template = file("${path.module}/email_templates/COPPA_Notice.txt.ftl")
   from_email            = "example@local.fusionauth.io"
 }
 
 resource "fusionauth_email" "email-verification" {
   name                  = "Email Verification"
   default_from_name     = "Email Verification"
-  default_html_template = file("${path.module}/email_templates/email-verification.html.ftl")
+  default_html_template = file("${path.module}/email_templates/Email_Verification.html.ftl")
   default_subject       = "Email Verification"
-  default_text_template = file("${path.module}/email_templates/email-verification.txt.ftl")
+  default_text_template = file("${path.module}/email_templates/Email_Verification.txt.ftl")
   from_email            = "example@local.fusionauth.io"
 }
 
-resource "fusionauth_email" "parent-registration-request" {
+resource "fusionauth_email" "parent-registration" {
   name                  = "Parent Registration"
   default_from_name     = "Parent Registration"
-  default_html_template = file("${path.module}/email_templates/parent-registration-request.html.ftl")
+  default_html_template = file("${path.module}/email_templates/Parent_Registration.html.ftl")
   default_subject       = "Parent Registration"
-  default_text_template = file("${path.module}/email_templates/parent-registration-request.txt.ftl")
+  default_text_template = file("${path.module}/email_templates/Parent_Registration.txt.ftl")
   from_email            = "example@local.fusionauth.io"
 }
 
 resource "fusionauth_email" "passwordless-login" {
   name                  = "Passwordless Login"
   default_from_name     = "Passwordless Login"
-  default_html_template = file("${path.module}/email_templates/passwordless-login.html.ftl")
+  default_html_template = file("${path.module}/email_templates/Passwordless_Login.html.ftl")
   default_subject       = "Passwordless Login"
-  default_text_template = file("${path.module}/email_templates/passwordless-login.txt.ftl")
+  default_text_template = file("${path.module}/email_templates/Passwordless_Login.txt.ftl")
   from_email            = "example@local.fusionauth.io"
 }
 
 resource "fusionauth_email" "registration-verification" {
   name                  = "Registration Verification"
   default_from_name     = "Registration Verification"
-  default_html_template = file("${path.module}/email_templates/registration-verification.html.ftl")
+  default_html_template = file("${path.module}/email_templates/Registration_Verification.html.ftl")
   default_subject       = "Registration Verification"
-  default_text_template = file("${path.module}/email_templates/registration-verification.txt.ftl")
+  default_text_template = file("${path.module}/email_templates/Registration_Verification.txt.ftl")
   from_email            = "example@local.fusionauth.io"
 }
 
 resource "fusionauth_email" "thread-detected" {
   name                  = "Thread Detected"
   default_from_name     = "Thread Detected"
-  default_html_template = file("${path.module}/email_templates/threat-detected.html.ftl")
+  default_html_template = file("${path.module}/email_templates/Threat_Detected.html.ftl")
   default_subject       = "Thread Detected"
-  default_text_template = file("${path.module}/email_templates/threat-detected.txt.ftl")
+  default_text_template = file("${path.module}/email_templates/Threat_Detected.txt.ftl")
   from_email            = "example@local.fusionauth.io"
 }
 
 resource "fusionauth_email" "two-factor-authentication" {
   name                  = "Two Factor Authentication"
   default_from_name     = "Two Factor Authentication"
-  default_html_template = file("${path.module}/email_templates/two-factor-authentication.html.ftl")
+  default_html_template = file("${path.module}/email_templates/Two_Factor_Authentication.html.ftl")
   default_subject       = "Two Factor Authentication"
-  default_text_template = file("${path.module}/email_templates/two-factor-authentication.txt.ftl")
+  default_text_template = file("${path.module}/email_templates/Two_Factor_Authentication.txt.ftl")
   from_email            = "example@local.fusionauth.io"
 }
 
 resource "fusionauth_email" "two-factor-authentication-method-added" {
   name                  = "Two Factor Authentication Method Added"
   default_from_name     = "Two Factor Authentication Method Added"
-  default_html_template = file("${path.module}/email_templates/two-factor-authentication-method-added.html.ftl")
+  default_html_template = file("${path.module}/email_templates/Two_Factor_Authentication_Added.html.ftl")
   default_subject       = "Two Factor Authentication Method Added"
-  default_text_template = file("${path.module}/email_templates/two-factor-authentication-method-added.txt.ftl")
+  default_text_template = file("${path.module}/email_templates/Two_Factor_Authentication_Added.txt.ftl")
   from_email            = "example@local.fusionauth.io"
 }
 
 resource "fusionauth_email" "two-factor-authentication-method-removed" {
   name                  = "Two Factor Authentication Method Removed"
   default_from_name     = "Two Factor Authentication Method Removed"
-  default_html_template = file("${path.module}/email_templates/two-factor-authentication-method-removed.html.ftl")
+  default_html_template = file("${path.module}/email_templates/Two_Factor_Authentication_Removed.html.ftl")
   default_subject       = "Two Factor Authentication Method Removed"
-  default_text_template = file("${path.module}/email_templates/two-factor-authentication-method-removed.txt.ftl")
+  default_text_template = file("${path.module}/email_templates/Two_Factor_Authentication_Removed.txt.ftl")
   from_email            = "example@local.fusionauth.io"
 }
