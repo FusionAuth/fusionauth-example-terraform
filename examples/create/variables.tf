@@ -26,7 +26,7 @@ variable "fusionauth_default_application_id" {
 variable "fusionauth_default_theme_id" {
   description = "The Default Theme Id of the FusionAuth Instance"
   type        = string
-  default     = ""
+  default     = "75a068fd-e94b-451a-9aeb-3ddb9a3b5987"
 }
 
 variable "fusionauth_email_configuration_host" {
